@@ -10,15 +10,14 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 #I am telling cmake to use vcpkg
-set(CMAKE_TOOLCHAIN_FILE "/Users/lou/vcpkg/buildsystems/vcpkg.cmake" CACHE STRING "Vcpkg toolchain file")
+set(CMAKE_TOOLCHAIN_FILE "/Users/lou/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "Vcpkg toolchain file")
 #ADD the src folder
 file(GLOB SOURCES "src/*.cpp")
 
 #add executable
 add_executable(${PROJECT_NAME} ${SOURCES}
-        src/main.cpp
-        src/main.cpp
         src/main.cpp)
+
 
 #sdl2
 
