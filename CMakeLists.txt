@@ -16,7 +16,11 @@ file(GLOB SOURCES "src/*.cpp")
 
 #add executable
 add_executable(${PROJECT_NAME} ${SOURCES}
-        src/main.cpp)
+        src/main.cpp
+        src/controls.cpp
+        src/game.cpp
+        src/rounds.cpp
+        src/Game.h)
 
 
 #sdl2
