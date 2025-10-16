@@ -1,23 +1,20 @@
 #include <iostream>
 #include "SDL.h"
-#include "SDL_assert.h"
 #include "Game.h"
-
-
-using namespace std;
 
 int main (int argc, char * argv[]) {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "error", "Error initialising SDL", nullptr);
         return 1;
     }
+//calls game.h basically same as setup. it shows a message when failed
     Game game;
     if(!game.init("Vampires", 800, 600)) {
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "ERROR", "FAILED TO INITIALISE GAME", nullptr);
         SDL_Quit();
         return 1;
     }
-
+//for running
     while (game.isRunning())
     {
         game.handleEvents();
