@@ -7,7 +7,7 @@ int main (int argc, char * argv[]) {
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "error", "Error initialising SDL", nullptr);
         return 1;
     }
-//calls game.h basically same as setup. it shows a message when failed
+//calls game.h basically the same as setup. It shows a message when it fails
     Game game;
     if(!game.init("Vampires", 800, 600)) {
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "ERROR", "FAILED TO INITIALISE GAME", nullptr);
@@ -24,6 +24,4 @@ int main (int argc, char * argv[]) {
     game.clean();
     SDL_Quit();
     return 0;
-
-
 }
