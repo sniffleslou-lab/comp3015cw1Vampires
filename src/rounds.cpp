@@ -1,3 +1,25 @@
-//
-// Created by Lou halpin on 15/10/2025.
-//
+#include <iostream>
+#include "Rounds.h"
+
+Rounds::Rounds() : CurrentRound(0),totalGuests(0),roundOver(0){}
+
+Rounds::~Rounds() {}
+
+void Rounds::StartRound() {
+    roundOver = false;
+    totalGuests = 3;
+    std:: cout << "round " << CurrentRound << " started " << std::endl;
+}
+void Rounds::Update() {
+    totalGuests <=0;{
+        roundOver = true;
+    }
+}
+
+void Rounds::render(SDL_Renderer *renderer) {
+    //just a shell atm need to do
+}
+bool Rounds::isRoundOver() const {
+    return roundOver;
+}
+
