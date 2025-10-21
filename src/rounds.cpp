@@ -13,6 +13,7 @@ void Rounds::StartRound() {
 void Rounds::Update() {
     totalGuests <=0;{
         roundOver = true;
+        totalGuests +=2;
     }
 }
 

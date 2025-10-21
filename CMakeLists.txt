@@ -21,7 +21,8 @@ add_executable(${PROJECT_NAME} ${SOURCES}
         src/game.cpp
         src/rounds.cpp
         src/Game.h
-        src/Rounds.h)
+        src/Rounds.h
+        src/Buttons.h)
 
 
 #sdl2

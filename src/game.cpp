@@ -13,6 +13,9 @@ bool Game::init(const char *title, int width, int height) {
     if (!renderer) return false;
     running =true;
     return true;
+
+    //loading buttons
+    
 }
 
 void Game::handleEvents() {
@@ -28,9 +31,11 @@ void Game::update(){
 }
 
 void Game::render() {
-    SDL_SetRenderDrawColor(renderer, 0,0,0,255); //should be a black background
+    SDL_SetRenderDrawColor(renderer, 0,0,0,255);//sets the colour as black, due to being aesthetic
     SDL_RenderClear(renderer);
-    //still need to get assests
+
+    //buttons
+
     SDL_RenderPresent(renderer);
 }
 
