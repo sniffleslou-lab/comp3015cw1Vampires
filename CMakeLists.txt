@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 #I am telling cmake to use vcpkg
-set(CMAKE_TOOLCHAIN_FILE "/Users/lou/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "Vcpkg toolchain file")
+#set(CMAKE_TOOLCHAIN_FILE "/Users/lou/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "Vcpkg toolchain file")
 #ADD the src folder
 file(GLOB SOURCES "src/*.cpp")
 
@@ -28,5 +28,11 @@ add_executable(${PROJECT_NAME} ${SOURCES}
 #sdl2
 
 find_package(SDL2 CONFIG REQUIRED)
-#include_directories(${SDL2_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2 SDL2::SDL2main)
+find_package(SDL2_image REQUIRED)
+
+include_directories(${SDL2_INCLUDE_DIRS})
+
+target_link_libraries(Vampires PRIVATE
+        SDL2::SDL2
+        $<IF:$<TARGET_EXISTS:SDL2_image::SDL2_image>,SDL2_image::SDL2_image,SDL2_image::SDL2_image-static>
+)

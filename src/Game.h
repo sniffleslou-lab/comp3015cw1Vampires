@@ -17,7 +17,7 @@ private:
     bool running;
     SDL_Window* window;
     SDL_Renderer* renderer;
-    //buttons belloow
+    //buttons bellow
     SDL_Texture*KickButtonTexture;
     SDL_Texture*LetInButtonTexture;
     SDL_Rect kickButtonReact;
