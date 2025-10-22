@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Game.h"
 #include "SDL_image.h"
+#include "SDL_ttf.h"
 
 Game::Game() : window(nullptr),
 renderer(nullptr),
@@ -66,8 +67,8 @@ void Game::render() {
     SDL_RenderClear(renderer);
 
     //buttons
-    kickButtonReact = {100,400,256,128};
-    letInButtonReact = {450,400,256,128};
+    kickButtonReact = {100,450,256,128};
+    letInButtonReact = {450,450,256,128};
     SDL_RenderCopy(renderer, KickButtonTexture, nullptr, &kickButtonReact);
     SDL_RenderCopy(renderer, LetInButtonTexture, nullptr, &letInButtonReact);
 
