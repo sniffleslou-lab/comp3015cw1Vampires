@@ -63,8 +63,11 @@ bool Game::init(const char *title, int width, int height) {
         std::cerr << "failed to load font: " << TTF_GetError() << std::endl;
     }
 
-    kickButtonReact = {100,400,128,64};
-    letInButtonReact = {100,400,128,64};
+ //   kickButtonReact = {100,400,128,64};
+   // letInButtonReact = {100,400,128,64};
+    kickButtonReact = {100,450,256,128};
+    letInButtonReact = {450,450,256,128};
+    textBoxReact = {20,260,760,180};
 
     running = true;
     return true;
@@ -88,7 +91,7 @@ void Game::render() {
     //buttons
     kickButtonReact = {100,450,256,128};
     letInButtonReact = {450,450,256,128};
-    textBoxReact = {20,260,760,180};
+    textBoxReact = {20,290,760,150};
     SDL_RenderCopy(renderer, KickButtonTexture, nullptr, &kickButtonReact);
     SDL_RenderCopy(renderer, LetInButtonTexture, nullptr, &letInButtonReact);
     SDL_RenderCopy(renderer,TextBoxTexture, nullptr,&textBoxReact);
@@ -102,6 +105,7 @@ void Game::clean() {
     SDL_DestroyWindow(window);
     SDL_DestroyTexture(KickButtonTexture);
     SDL_DestroyTexture(LetInButtonTexture);
+    SDL_DestroyTexture(TextBoxTexture);
     IMG_Quit();
     SDL_Quit();
 }
