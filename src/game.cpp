@@ -62,8 +62,7 @@ bool Game::init(const char *title, int width, int height) {
     if(!font){
         std::cerr << "failed to load font: " << TTF_GetError() << std::endl;
     }
-
- //   kickButtonReact = {100,400,128,64};
+    //kickButtonReact = {100,400,128,64};
    // letInButtonReact = {100,400,128,64};
     kickButtonReact = {100,450,256,128};
     letInButtonReact = {450,450,256,128};
@@ -85,7 +84,7 @@ void Game::update(){
 }
 
 void Game::render() {
-    SDL_SetRenderDrawColor(renderer, 0,0,0,255);//sets the colour as black, due to being aesthetic
+    SDL_SetRenderDrawColor(renderer, 0,0,0,255);//sets the colour as black, due to being aesthetic reasons
     SDL_RenderClear(renderer);
 
     //buttons
