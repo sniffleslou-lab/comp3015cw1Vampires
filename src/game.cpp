@@ -7,7 +7,8 @@ Game::Game() : window(nullptr),
 renderer(nullptr),
 running(false),
 KickButtonTexture(nullptr),
-LetInButtonTexture(nullptr)
+LetInButtonTexture(nullptr),
+TextBoxTexture(nullptr)
 {}
 
 Game::~Game(){}
@@ -27,7 +28,9 @@ bool Game::init(const char *title, int width, int height) {
     }else{
         std::cerr << "SDL_GetBasePath Failed: " << SDL_GetError()<< std::endl;
     }
-
+    if(TTF_Init()==-1){
+        std::cerr << "ttf_init failed " << TTF_GetError() << std::endl;
+    }
     //loading buttons
     //kick button
     SDL_Surface *tempSurface = IMG_Load("../assets/textures/KickButton.png");
@@ -45,8 +48,24 @@ bool Game::init(const char *title, int width, int height) {
         LetInButtonTexture = SDL_CreateTextureFromSurface(renderer, tempSurface);
         SDL_FreeSurface(tempSurface);
     }
+    //textbox
+    tempSurface = IMG_Load("../assets/textures/BorderOutline.png");
+    if (!tempSurface){
+        std::cerr <<"failed to load border: " << IMG_GetError() << std::endl;
+    }else
+    {
+        TextBoxTexture = SDL_CreateTextureFromSurface(renderer, tempSurface);
+        SDL_FreeSurface(tempSurface);
+    }
+    //font
+    TTF_Font* font = TTF_OpenFont("../assets/fonts/BLKCHCRY.TTF", 24);
+    if(!font){
+        std::cerr << "failed to load font: " << TTF_GetError() << std::endl;
+    }
+
     kickButtonReact = {100,400,128,64};
     letInButtonReact = {100,400,128,64};
+
     running = true;
     return true;
 }
@@ -69,8 +88,11 @@ void Game::render() {
     //buttons
     kickButtonReact = {100,450,256,128};
     letInButtonReact = {450,450,256,128};
+    textBoxReact = {20,260,760,180};
     SDL_RenderCopy(renderer, KickButtonTexture, nullptr, &kickButtonReact);
     SDL_RenderCopy(renderer, LetInButtonTexture, nullptr, &letInButtonReact);
+    SDL_RenderCopy(renderer,TextBoxTexture, nullptr,&textBoxReact);
+
 
     SDL_RenderPresent(renderer);
 }

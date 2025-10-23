@@ -22,4 +22,7 @@ private:
     SDL_Texture*LetInButtonTexture;
     SDL_Rect kickButtonReact;
     SDL_Rect letInButtonReact;
+    //text box
+    SDL_Texture*TextBoxTexture;
+    SDL_Rect  textBoxReact;
 };
