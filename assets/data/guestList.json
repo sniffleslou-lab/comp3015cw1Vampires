@@ -1,0 +1,94 @@
+{
+  "guests": [
+    {
+      "id": 1,
+      "name": "Anna Sally",
+      "gender": "f",
+      "traits" : ["pale" , "warm smile", "Smells of herbs"]
+    },
+    {
+      "id": 2,
+      "name": "Elisabeth Swan",
+      "gender": "f",
+      "traits": ["wearing neck scarf", "talks slowly","polite" ]
+    },
+    {
+      "id": 3,
+      "name":"Henrietta",
+      "gender": "f",
+      "traits": ["polite", "smells of herbs", "talks slowly"]
+    },
+    {
+      "id": 4,
+      "name": "Pauline Winifred",
+      "gender":"f",
+      "traits": ["nervous laugh", "eats snacks", "mentions allergies"]
+    },
+    {
+      "id": 5,
+      "name": "Maria",
+      "gender":"f",
+      "traits": ["wears dark clothes", "mention needing coffee", "sneezing"]
+    },
+    {
+      "id": 6,
+      "name": "Shelly",
+      "gender":"f",
+      "traits": ["Messy hair", "yawns","smells of herbs"]
+    },
+    {
+      "id": 7,
+      "name":"Barbara Cornelia",
+      "gender": "f",
+      "traits": ["tanned", "warm smile", "avoids garlic"]
+    },
+    {
+      "id": 8,
+      "name":"Wilhelmine",
+      "gender": "f",
+      "traits": ["wears dark colours", "talks slowly", "sniffling"]
+    },
+    {
+      "id": 9,
+      "name": "Duke Alexandre",
+      "gender": "m",
+      "traits": ["Very quiet", "prefect posture", "yawns a lot"]
+    },
+    {
+      "id": 10,
+      "name": "George Will",
+      "gender": "m",
+      "traits": ["has an thick accent","Talks about family a lot", "smiles naturally"]
+    },
+    {
+      "id": 11,
+      "name": "Gongora",
+      "gender": "m",
+      "traits": ["Has photos of his family", "eating snacks", "Doesn't make eye contact"]
+    },
+    {
+      "id":12,
+      "name":"John Q",
+      "gender":"m",
+      "traits": ["Nervous laugh", "warm hands", "mentions allergies"]
+    },
+    {
+      "id": 13,
+      "name": "Ludwig Antho",
+      "gender": "m",
+      "traits": ["Perfect Posture", "coughing a lot", "seems anxious"]
+    },
+    {
+      "id": 14,
+      "name": "William Cutch",
+      "gender": "m",
+      "traits": ["Smells like garlic", "pale skin", "strange eyes"]
+    },
+    {
+      "id":15,
+      "name": "Peter Rowl",
+      "gender": "m",
+      "traits": ["hesitates when news is mentioned", "very quiet", "talks about their job"]
+    }
+  ]
+}
