@@ -1,11 +1,10 @@
 {
-  "vampire_traits": [
+  "vampireTraits": [
     "avoids garlic",
     "has fangs",
     "No reflection",
     "pale",
     "wears scarf indoors",
-    "european accent",
     "cold to the touch",
     "wears gloves indoors",
     "Speaks too formal",
