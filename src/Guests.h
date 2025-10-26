@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include "SDL.h"
 #include <vector>
@@ -11,3 +12,4 @@ struct Guest {
     bool isVampire;
 };
 std::vector<Guest> loadGuests(const std::string& guestFilePath, const std::string & vampireFilePath,int vampireCount);
+

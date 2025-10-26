@@ -4,12 +4,30 @@
 #include <vector>
 #include <string>
 #include "Guests.h"
+#include <filesystem>
 
-
+namespace fs =std::filesystem;
 using json = nlohmann::json;
+
+//this is for randomly assigning portrait
+std::string getRandomPortrait(const std::string& genderFolder)
+{
+    std::vector<std::string> portraits;
+    for(const auto& entry :fs::directory_iterator(genderFolder))
+    {
+        if(entry.is_regular_file())
+        {
+            portraits.push_back(entry.path().string());
+        }
+    }
+    int index=rand() %portraits.size();
+    return portraits[index];
+
+}
 
 std::vector<Guest> guests;
 std::vector<std::string> vampireTraits;
+
 
 void loadData()
 {
@@ -26,11 +44,13 @@ void loadData()
         g.traits = item["traits"].get<std::vector<std::string>>();
         g.isVampire = false;
 
-        //asigning portarits/
-        if (g.gender == "m") {
-            g.portraitPath = "../assets/textures/M" + std::string
+        if (g.gender == "m"){
+            g.portraitPath = getRandomPortrait("../assets/textures/M");
+        } else if (g.gender=="f"){
+            g.portraitPath = getRandomPortrait("../assets/textures/F");
         }
         guests.push_back(g);
+
     }
     //vampiretraits.json
     std::ifstream vampireFile("../assets/data/vampire_traits.json");
@@ -44,7 +64,7 @@ void assignVampires(int count)
     srand(time(nullptr));
     for(int i = 0; i < count; i++)
     {
-        int index = rand() % vampireTraits.size();
+        int index = rand() % guests.size();
         guests[index].isVampire = true;
 
         for(int j=0; j<2; j++){
@@ -54,3 +74,5 @@ void assignVampires(int count)
     }
 
 }
+
+

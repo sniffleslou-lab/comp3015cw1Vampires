@@ -25,7 +25,8 @@ add_executable(${PROJECT_NAME} ${SOURCES}
         src/Buttons.h
         src/Guests.cpp
         src/guests.cpp
-        src/Guests.h)
+        src/Guests.h
+)
 
 
 #sdl2
