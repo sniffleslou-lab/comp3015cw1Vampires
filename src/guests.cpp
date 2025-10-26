@@ -3,20 +3,11 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include "Guests.h"
 
 
 using json = nlohmann::json;
 
-struct Guest{
-    int id;
-    std::string name;
-    std::string gender;
-    std::vector<std::string> traits;
-    std::string portraitPath;
-    bool isVampire;
-
-
-};
 std::vector<Guest> guests;
 std::vector<std::string> vampireTraits;
 
@@ -27,13 +18,18 @@ void loadData()
     json guestJson;
     guestList >> guestJson;
 
-    for (auto& item : guestJson["guests"])
-    {
+    for (auto& item : guestJson["guests"]) {
         Guest g;
+        g.id = item["id"];
         g.name = item["name"];
         g.gender = item["gender"];
         g.traits = item["traits"].get<std::vector<std::string>>();
         g.isVampire = false;
+
+        //asigning portarits/
+        if (g.gender == "m") {
+            g.portraitPath = "../assets/textures/M" + std::string
+        }
         guests.push_back(g);
     }
     //vampiretraits.json

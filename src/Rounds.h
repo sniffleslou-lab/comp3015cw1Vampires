@@ -1,5 +1,6 @@
 #include <iostream>
 #include "SDL.h"
+#include "Guests.h"
 
 class Rounds{
     public:
@@ -22,4 +23,6 @@ private:
     //timer stuff finish this later
     Uint32 roundStartTime;
     Uint32  roundDuration;
+
+    std::vector<Guest> guests;
 };
