@@ -1,6 +1,7 @@
 #include <iostream>
 #include "SDL.h"
 #include "Game.h"
+#include "Rounds.h"
 
 
 
@@ -18,8 +19,8 @@ int main (int argc, char * argv[]) {
         return 1;
     }
 
-    SDL_Renderer* renderer = Game.Renderer()
-    Rounds rounds
+    SDL_Renderer* renderer = game.getRenderer();
+    Rounds rounds;
     rounds.StartRound(renderer);
 
 //for running
@@ -27,9 +28,7 @@ int main (int argc, char * argv[]) {
     {
         game.handleEvents();
         game.update();
-        rounds.update();
         game.render();
-        rounds.render(renderer);
 
 
     }
