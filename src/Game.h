@@ -1,5 +1,7 @@
 #pragma once
 #include "SDL.h"
+#include "Rounds.h"
+#include "Guests.h"
 
 class Game{
 public:
@@ -13,6 +15,8 @@ public:
     void clean();
 
     bool isRunning() const{ return running; }
+    SDL_Renderer* getRenderer()const;
+
 private:
     bool running;
     SDL_Window* window;
@@ -25,4 +29,5 @@ private:
     //text box
     SDL_Texture*TextBoxTexture;
     SDL_Rect  textBoxReact;
+    Rounds rounds;
 };

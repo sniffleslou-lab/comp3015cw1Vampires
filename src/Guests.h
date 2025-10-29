@@ -10,6 +10,9 @@ struct Guest {
     std::vector<std::string> traits;
     std::string portraitPath;
     bool isVampire;
+    SDL_Texture* texture = nullptr;
 };
+void loadData();
+void assignVampires(int count);
 std::vector<Guest> loadGuests(const std::string& guestFilePath, const std::string & vampireFilePath,int vampireCount);
 

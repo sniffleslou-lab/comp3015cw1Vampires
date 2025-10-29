@@ -68,8 +68,13 @@ bool Game::init(const char *title, int width, int height) {
     letInButtonReact = {450,450,256,128};
     textBoxReact = {20,260,760,180};
 
+
     running = true;
     return true;
+
+}
+SDL_Renderer* Game::getRenderer()const {
+    return renderer;
 }
 void Game::handleEvents() {
     SDL_Event event;

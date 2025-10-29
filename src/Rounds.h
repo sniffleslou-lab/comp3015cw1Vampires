@@ -1,13 +1,15 @@
+#pragma once
 #include <iostream>
 #include "SDL.h"
 #include "Guests.h"
+#include <vector>
 
 class Rounds{
     public:
         Rounds();
         ~Rounds();
 
-        void StartRound();
+        void StartRound(SDL_Renderer* renderer);
         void Update();
         void render(SDL_Renderer *renderer);
         bool isRoundOver() const;
