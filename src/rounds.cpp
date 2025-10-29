@@ -15,8 +15,9 @@ void Rounds::StartRound(SDL_Renderer* renderer) {
     totalGuests = 3 +(CurrentRound - 1) * 2;
     roundStartTime = SDL_GetTicks();
     std:: cout << "round " << CurrentRound << " started " << std::endl;
-    guests.clear();
-    loadData();
+
+    guests = loadGuests("../assets/data/guestList.json", "../assets/data/vampire_traits.json",2);
+
 
     for(auto& g : guests){
         SDL_Surface* tempSurface = IMG_Load(g.portraitPath.c_str());
@@ -55,12 +56,16 @@ void Rounds::render(SDL_Renderer *renderer) {
         Guest& g =guests[i];
 
         if(!g.texture) continue;
+        std::cerr << " no texture for guest " << g.name << " | path: " << g.portraitPath<< std::endl;
 
             SDL_Rect dstRect = {
                     x + static_cast<int>(i*(portraitWidth +20)),y,portraitWidth,portraitHeight
             };
+            std::cout << "drawing portrait: " << g.portraitPath << std::endl;
 
-            SDL_RenderCopy(renderer,g.texture, nullptr,&dstRect);
+            if (SDL_RenderCopy(renderer,g.texture, nullptr,&dstRect) !=0) {
+                std::cerr << "Render copy  failed: " <<SDL_GetError() << std::endl;
+            }
     }
 }
 bool Rounds::isRoundOver() const {

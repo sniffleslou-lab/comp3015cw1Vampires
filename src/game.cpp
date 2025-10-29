@@ -18,7 +18,7 @@ bool Game::init(const char *title, int width, int height) {
     if (!window) return false;
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     if (!renderer) return false;
-    if(!(IMG_Init(IMG_INIT_PNG)&IMG_INIT_PNG)){
+    if(!(IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG )&(IMG_INIT_PNG| IMG_INIT_JPG))){
         std::cerr << "IMG_InitFailed " << IMG_GetError() << std::endl;
     }
     char *basePath =SDL_GetBasePath();
@@ -31,6 +31,7 @@ bool Game::init(const char *title, int width, int height) {
     if(TTF_Init()==-1){
         std::cerr << "ttf_init failed " << TTF_GetError() << std::endl;
     }
+
     //loading buttons
     //kick button
     SDL_Surface *tempSurface = IMG_Load("../assets/textures/KickButton.png");
@@ -110,6 +111,7 @@ void Game::clean() {
     SDL_DestroyTexture(KickButtonTexture);
     SDL_DestroyTexture(LetInButtonTexture);
     SDL_DestroyTexture(TextBoxTexture);
+    IMG_Quit();
     IMG_Quit();
     SDL_Quit();
 }
