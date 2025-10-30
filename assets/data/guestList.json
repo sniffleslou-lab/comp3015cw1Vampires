@@ -4,7 +4,7 @@
       "id": 1,
       "name": "Anna Sally",
       "gender": "f",
-      "traits" : ["pale" , "warm smile", "Smells of herbs"]
+      "traits" : ["pale", "warm smile", "Smells of herbs"]
     },
     {
       "id": 2,
@@ -21,19 +21,19 @@
     {
       "id": 4,
       "name": "Pauline Winifred",
-      "gender":"f",
+      "gender": "f",
       "traits": ["nervous laugh", "eats snacks", "mentions allergies"]
     },
     {
       "id": 5,
       "name": "Maria",
-      "gender":"f",
+      "gender": "f",
       "traits": ["wears dark clothes", "mention needing coffee", "sneezing"]
     },
     {
       "id": 6,
       "name": "Shelly",
-      "gender":"f",
+      "gender": "f",
       "traits": ["Messy hair", "yawns","smells of herbs"]
     },
     {

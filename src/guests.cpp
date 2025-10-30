@@ -5,6 +5,7 @@
 #include <string>
 #include "Guests.h"
 #include <filesystem>
+#include <SDL_image.h>
 
 namespace fs =std::filesystem;
 using json = nlohmann::json;
@@ -13,7 +14,6 @@ using json = nlohmann::json;
 std::string getRandomPortrait(const std::string& genderFolder)
 {
     std::vector<std::string> portraits;
-    std::string  base ="../assets/textures/" + genderFolder + "/";
     for(const auto& entry :fs::directory_iterator(genderFolder))
     {
         if(entry.is_regular_file())
@@ -28,6 +28,10 @@ std::string getRandomPortrait(const std::string& genderFolder)
             }
         }
     }
+    if (portraits.empty()){
+        std::cerr << "no portraits found in folder: " << genderFolder <<std::endl;
+        return "";
+    }
     int index=rand() %portraits.size();
     return portraits[index];
 
@@ -35,10 +39,17 @@ std::string getRandomPortrait(const std::string& genderFolder)
 
 std::vector<Guest> loadGuests(const std::string& guestFilePath, const std::string & vampireFilePath,int vampireCount)
 {
+
     std::vector<Guest> guests;
     std::vector<std::string> vampireTraits;
     //attempt3 loading guests
-    std::ifstream guestList("../assets/data/guestList.json");
+    std::ifstream guestList(guestFilePath);
+    if(!guestList.is_open()){
+        std::cerr << "could not open guest list json from path: " << std::endl;
+        return guests;
+    }else {
+        std::cerr << "opened gustlist json!" <<std::endl;
+    }
     json guestJson;
     guestList >> guestJson;
 
@@ -51,15 +62,17 @@ std::vector<Guest> loadGuests(const std::string& guestFilePath, const std::strin
         g.isVampire = false;
 
         if (g.gender == "m")
-            g.portraitPath = getRandomPortrait("../assets/textures/M");
+            g.portraitPath = getRandomPortrait(std::string(ASSETS_PATH) + "/textures/M");
+            //g.portraitPath = getRandomPortrait("assets/textures/M");
+
         else if (g.gender == "f")
-            g.portraitPath = getRandomPortrait("../assets/textures/F");
+            g.portraitPath = getRandomPortrait(std::string(ASSETS_PATH) + "/textures/F");
 
         guests.push_back(g);
     }
 
         //vampiretraits.json
-        std::ifstream vampireFile("../assets/data/vampire_traits.json");
+        std::ifstream vampireFile(vampireFilePath);
         json vampJson;
         vampireFile >> vampJson;
         vampireTraits = vampJson["vampireTraits"].get<std::vector<std::string>>();

@@ -90,8 +90,6 @@ void Game::update(){
 }
 
 void Game::render() {
-    SDL_SetRenderDrawColor(renderer, 0,0,0,255);//sets the colour as black, due to being aesthetic reasons
-    SDL_RenderClear(renderer);
 
     //buttons
     kickButtonReact = {100,450,256,128};
@@ -102,7 +100,6 @@ void Game::render() {
     SDL_RenderCopy(renderer,TextBoxTexture, nullptr,&textBoxReact);
 
 
-    SDL_RenderPresent(renderer);
 }
 
 void Game::clean() {
@@ -112,6 +109,6 @@ void Game::clean() {
     SDL_DestroyTexture(LetInButtonTexture);
     SDL_DestroyTexture(TextBoxTexture);
     IMG_Quit();
-    IMG_Quit();
+
     SDL_Quit();
 }

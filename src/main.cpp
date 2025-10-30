@@ -31,13 +31,10 @@ int main (int argc, char * argv[]) {
         game.handleEvents();
         game.update();
 
-
-
         SDL_SetRenderDrawColor(renderer,0,0,0,255);
         SDL_RenderClear(renderer);
 
         rounds.render(renderer);
-
         game.render();
 
         SDL_RenderPresent(renderer);

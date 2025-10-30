@@ -4,11 +4,13 @@
 #include "Guests.h"
 #include "SDL_image.h"
 #include "SDL_rect.h"
+#include <fstream>
 
 
 Rounds::Rounds() : CurrentRound(1),totalGuests(0),roundOver(false), roundStartTime(0), roundDuration(90000){}
 
 Rounds::~Rounds() {}
+
 
 void Rounds::StartRound(SDL_Renderer* renderer) {
     roundOver = false;
@@ -16,17 +18,33 @@ void Rounds::StartRound(SDL_Renderer* renderer) {
     roundStartTime = SDL_GetTicks();
     std:: cout << "round " << CurrentRound << " started " << std::endl;
 
-    guests = loadGuests("../assets/data/guestList.json", "../assets/data/vampire_traits.json",2);
+    guests = loadGuests(std::string (ASSETS_PATH)+"/data/guestList.json",std::string(ASSETS_PATH)+"/data/vampire_traits.json",2);
 
+    std::unordered_map<std::string, SDL_Texture*> textureCache;
 
     for(auto& g : guests){
+        //testing if I am reusing because I am crying
+        if(textureCache.find(g.portraitPath) != textureCache.end()){
+            g.texture = textureCache[g.portraitPath];
+            continue;
+        }
+        std::ifstream test(g.portraitPath);
+        if(!test.good()){
+            std::cerr << "portrait file not found: " << g.portraitPath<<std::endl;
+            continue;
+        }
+
         SDL_Surface* tempSurface = IMG_Load(g.portraitPath.c_str());
         if(!tempSurface){
-            std::cerr<< "failed to load portrait: " << g.portraitPath << " | " <<IMG_GetError() << "\n";
+            std::cerr<< "failed to load portrait: " << g.portraitPath << " | " <<IMG_GetError() << std::endl;
             continue;
         }
         g.texture = SDL_CreateTextureFromSurface(renderer, tempSurface);
         SDL_FreeSurface(tempSurface);
+        if(!g.texture){
+            std::cerr << "texture creation has failed for: " << g.portraitPath << " | " << SDL_GetError()<<std::endl;
+        }
+        textureCache[g.portraitPath]= g.texture;
 
     }
 
@@ -52,11 +70,13 @@ void Rounds::render(SDL_Renderer *renderer) {
     int portraitHeight = 150;
 
     //this sections draws guest portraits
-    for(size_t i =0; i < guests.size();++i){
-        Guest& g =guests[i];
+    for(size_t i =0; i < guests.size();++i) {
+        Guest &g = guests[i];
 
-        if(!g.texture) continue;
-        std::cerr << " no texture for guest " << g.name << " | path: " << g.portraitPath<< std::endl;
+        if (!g.texture) { ;
+            std::cerr << " no texture for guest " << g.name << " | path: " << g.portraitPath << std::endl;
+            continue;
+        }
 
             SDL_Rect dstRect = {
                     x + static_cast<int>(i*(portraitWidth +20)),y,portraitWidth,portraitHeight
