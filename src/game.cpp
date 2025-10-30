@@ -18,7 +18,7 @@ bool Game::init(const char *title, int width, int height) {
     if (!window) return false;
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     if (!renderer) return false;
-    if(!(IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG )&(IMG_INIT_PNG| IMG_INIT_JPG))){
+    if(!(IMG_Init(IMG_INIT_PNG )&(IMG_INIT_PNG))){
         std::cerr << "IMG_InitFailed " << IMG_GetError() << std::endl;
     }
     char *basePath =SDL_GetBasePath();

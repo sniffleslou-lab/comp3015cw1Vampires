@@ -13,11 +13,19 @@ using json = nlohmann::json;
 std::string getRandomPortrait(const std::string& genderFolder)
 {
     std::vector<std::string> portraits;
+    std::string  base ="../assets/textures/" + genderFolder + "/";
     for(const auto& entry :fs::directory_iterator(genderFolder))
     {
         if(entry.is_regular_file())
         {
-            portraits.push_back(entry.path().string());
+            //portraits.push_back(entry.path().string());
+            std::string path = entry.path().string();
+
+            //i think ds_store is breaking the game
+            if (path.find(".DS_Store") != std::string::npos) continue;
+            if(entry.path().extension()==".png"){
+                portraits.push_back(path);
+            }
         }
     }
     int index=rand() %portraits.size();
