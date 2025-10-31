@@ -17,6 +17,7 @@ class Rounds{
 
 
 private:
+    size_t currentGuestIndex;
     int CurrentRound;
     int totalGuests;
     bool roundOver;

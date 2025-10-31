@@ -7,7 +7,7 @@
 #include <fstream>
 
 
-Rounds::Rounds() : CurrentRound(1),totalGuests(0),roundOver(false), roundStartTime(0), roundDuration(90000){}
+Rounds::Rounds() : CurrentRound(1),totalGuests(0),roundOver(false), roundStartTime(0), roundDuration(90000), currentGuestIndex(0){}
 
 Rounds::~Rounds() {}
 
