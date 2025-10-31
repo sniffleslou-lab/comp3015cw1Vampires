@@ -13,6 +13,7 @@ class Rounds{
         void Update();
         void render(SDL_Renderer *renderer);
         bool isRoundOver() const;
+        void nextGuest();
 
 
 

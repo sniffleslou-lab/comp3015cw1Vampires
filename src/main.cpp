@@ -23,6 +23,7 @@ int main (int argc, char * argv[]) {
 
     SDL_Renderer* renderer = game.getRenderer();
     Rounds rounds;
+    game.setRounds(&rounds);
     rounds.StartRound(renderer);
 
 //for running

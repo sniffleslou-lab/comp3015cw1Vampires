@@ -13,7 +13,7 @@ public:
     void update();
     void render();
     void clean();
-
+    void setRounds(Rounds* rounds);
     bool isRunning() const{ return running; }
     SDL_Renderer* getRenderer()const;
 
@@ -30,4 +30,5 @@ private:
     SDL_Texture*TextBoxTexture;
     SDL_Rect  textBoxReact;
     Rounds rounds;
+    Rounds* currentRound;
 };

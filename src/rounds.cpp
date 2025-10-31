@@ -64,6 +64,21 @@ void Rounds::Update() {
 }
 
 void Rounds::render(SDL_Renderer *renderer) {
+    if (guests.empty() || currentGuestIndex >= guests.size()){
+        std::cerr << "no guests to render or index out of range. \n";
+        return;
+    }
+    Guest& g = guests[currentGuestIndex];
+    if (!g.texture){
+        std::cerr << "no texture for guests "<< g.name << " | path " << g.portraitPath <<std::endl;
+        return;
+    }
+    SDL_Rect dstRect = {325,100,150,150};
+    std::cerr<< "drawing one guest: " << g.name << " | " << g.portraitPath << std::endl;
+    if (SDL_RenderCopy(renderer,g.texture, nullptr, &dstRect)!=0){
+        std::cerr << "render copy failed: " << SDL_GetError()<< std::endl;
+    }
+   /*
     int x = 50;
     int y = 100;
     int portraitWidth = 150;
@@ -86,6 +101,16 @@ void Rounds::render(SDL_Renderer *renderer) {
             if (SDL_RenderCopy(renderer,g.texture, nullptr,&dstRect) !=0) {
                 std::cerr << "Render copy  failed: " <<SDL_GetError() << std::endl;
             }
+    }*/
+}
+void::Rounds::nextGuest()
+{
+    if(currentGuestIndex + 1 < guests.size()){
+        currentGuestIndex++;
+    } else
+    {
+        roundOver= true;
+        std::cout << "every guest has processed!" << std::endl;
     }
 }
 bool Rounds::isRoundOver() const {

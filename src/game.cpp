@@ -83,7 +83,27 @@ void Game::handleEvents() {
         if(event.type == SDL_QUIT){
             running = false;
         }
+        if(event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT){
+            int x = event.button.x;
+            int y = event.button.y;
+
+            if(x >= kickButtonReact.x && x <= kickButtonReact.x + kickButtonReact.w
+                && y >= kickButtonReact.y && kickButtonReact.y + kickButtonReact.h)
+            {
+                std::cout<< "kick pressed\n";
+                currentRound->nextGuest();
+            }
+            if(x >= letInButtonReact.x && x <= letInButtonReact.x + letInButtonReact.w
+               && y >= letInButtonReact.y && letInButtonReact.y + letInButtonReact.h)
+            {
+                std::cout<< "let in  pressed\n";
+                currentRound->nextGuest();
+            }
+        }
     }
+}
+void Game::setRounds(Rounds *rounds) {
+    currentRound = rounds;
 }
 void Game::update(){
 
