@@ -106,7 +106,10 @@ void Game::setRounds(Rounds *rounds) {
     currentRound = rounds;
 }
 void Game::update(){
-
+ if(rounds.isRoundOver()){
+     SDL_Delay(2000);
+     rounds.startNextRound(renderer);
+ }
 }
 
 void Game::render() {

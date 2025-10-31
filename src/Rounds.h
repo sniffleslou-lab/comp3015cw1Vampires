@@ -14,6 +14,12 @@ class Rounds{
         void render(SDL_Renderer *renderer);
         bool isRoundOver() const;
         void nextGuest();
+        //for rounds
+        bool allGuestsSeen() const;
+        int getCurrentRound()const{return CurrentRound;}
+        void startNextRound(SDL_Renderer* renderer);
+
+
 
 
 

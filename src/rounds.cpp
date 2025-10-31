@@ -113,6 +113,13 @@ void::Rounds::nextGuest()
         std::cout << "every guest has processed!" << std::endl;
     }
 }
+bool Rounds::allGuestsSeen() const {
+    return currentGuestIndex >= guests.size() -1;
+}
+void Rounds::startNextRound(SDL_Renderer *renderer) {
+    CurrentRound++;
+    StartRound(renderer);
+}
 bool Rounds::isRoundOver() const {
     return roundOver;
 }
