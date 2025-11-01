@@ -71,6 +71,8 @@ void Rounds::Update() {
 }
 
 void Rounds::render(SDL_Renderer *renderer) {
+    Uint32 now = SDL_GetTicks();
+    if(now = roundStartTime < 1000) return;
     if (guests.empty() || currentGuestIndex >= guests.size()) {
         std::cerr << "no guests to render or index out of range. \n";
         return;
@@ -128,9 +130,6 @@ void Rounds::startNextRound(SDL_Renderer *renderer) {
     currentGuestIndex =0;
     roundOver= false;
 
-
-
-    StartRound(renderer);
 }
 bool Rounds::isRoundOver() const {
     return roundOver;

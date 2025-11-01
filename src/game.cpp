@@ -117,14 +117,15 @@ Uint32 now = SDL_GetTicks();
     switch (currentScene) {
         case Scene:: Start:
             if (now - sceneStartTime > 2000){
-            currentScene = Scene::RoundIntro;
-            sceneStartTime = now;
+                currentScene = Scene::RoundIntro;
+                sceneStartTime = SDL_GetTicks();
             }break;
 
         case Scene::RoundIntro:
-            if(now- sceneStartTime > 2000){
+            if(SDL_GetTicks()- sceneStartTime > 9000){
+                currentRound->StartRound(renderer);
                 currentScene=Scene::Gameplay;
-                sceneStartTime = now;
+                sceneStartTime = SDL_GetTicks();
             } break;
             case Scene::Gameplay:
                 if (rounds.isRoundOver()) {
@@ -147,33 +148,42 @@ Uint32 now = SDL_GetTicks();
 
 void Game::render() {
 
-    //buttons
-    kickButtonReact = {100,450,256,128};
-    letInButtonReact = {450,450,256,128};
-    textBoxReact = {20,290,760,150};
-    SDL_RenderCopy(renderer, KickButtonTexture, nullptr, &kickButtonReact);
-    SDL_RenderCopy(renderer, LetInButtonTexture, nullptr, &letInButtonReact);
-    SDL_RenderCopy(renderer,TextBoxTexture, nullptr,&textBoxReact);
 
     switch (currentScene) {
         case Scene::Start:
-            renderText("Portraits of a Vampyre", 250, 150);
-            renderText("You're a doorman, employed as a doorman at a manor.", 200, 220);
-            renderText("You must only let humans in.. and not vampires.", 180, 260);
+
             break;
         case Scene::RoundIntro:
             if (currentRound) {
+                int roundNum = currentRound->getCurrentRound();
+
+                if( roundNum == 1){
+                    renderText("Portraits of a Vampyre", 250, 150);
+                    renderText("You're employed as a doorman at a manor.", 200, 220);
+                    renderText("You must only let humans in.. and not vampires.", 180, 260);
+                }
                 std::string roundMessage = "Round " + std::to_string(currentRound->getCurrentRound());
-                renderText(roundMessage, 320, 270);
+                renderText(roundMessage, 320,300);
             }
+
             break;
         case Scene::Gameplay:
             if (currentRound) {
                 currentRound->render(renderer);
             }
+            //buttons
+            kickButtonReact = {100,450,256,128};
+            letInButtonReact = {450,450,256,128};
+            textBoxReact = {20,290,760,150};
+            SDL_RenderCopy(renderer, KickButtonTexture, nullptr, &kickButtonReact);
+            SDL_RenderCopy(renderer, LetInButtonTexture, nullptr, &letInButtonReact);
+            SDL_RenderCopy(renderer,TextBoxTexture, nullptr,&textBoxReact);
             break;
+
+
         case Scene::Score:
             // renderText("Your Final score: " + rounds.g)
+            break;
 
     }
 
