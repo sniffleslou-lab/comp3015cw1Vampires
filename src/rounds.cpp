@@ -72,7 +72,7 @@ void Rounds::Update() {
 
 void Rounds::render(SDL_Renderer *renderer) {
     Uint32 now = SDL_GetTicks();
-    if(now = roundStartTime < 1000) return;
+    if(now - roundStartTime < 4000) return;
     if (guests.empty() || currentGuestIndex >= guests.size()) {
         std::cerr << "no guests to render or index out of range. \n";
         return;
@@ -112,8 +112,19 @@ void Rounds::render(SDL_Renderer *renderer) {
              }
      }*/
 }
-void Rounds::nextGuest()
+void Rounds::nextGuest(bool letIn)
 {
+    if(guests.empty()||currentGuestIndex>=guests.size()) return;
+
+    Guest& g = guests[currentGuestIndex];
+    if(letIn){
+        if(g.isVampire) vampiresLetIn++;
+        else humansLetIn++;
+    }else{
+        if(g.isVampire) vampiresKicked;
+        else humansKicked++;
+    }
+
     if(currentGuestIndex + 1 < guests.size()){
         currentGuestIndex++;
     } else
@@ -129,7 +140,14 @@ void Rounds::startNextRound(SDL_Renderer *renderer) {
     CurrentRound++;
     currentGuestIndex =0;
     roundOver= false;
+    StartRound(renderer);
 
+}
+std::string Rounds::getScoreSummary() const {
+    return "humans Let In: " + std::to_string(humansLetIn)+
+    "\nVampires Kicked: " +std::to_string(vampiresKicked)+
+    "\nVampires Let In: " +std::to_string(vampiresLetIn)+
+    "\nHumans Kicked: " +std::to_string(humansKicked);
 }
 bool Rounds::isRoundOver() const {
     return roundOver;

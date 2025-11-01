@@ -92,13 +92,13 @@ void Game::handleEvents() {
                 && y >= kickButtonReact.y && kickButtonReact.y + kickButtonReact.h)
             {
                 std::cout<< "kick pressed\n";
-                if(currentRound) currentRound->nextGuest();
+                if(currentRound) currentRound->nextGuest(false);
             }
             if(x >= letInButtonReact.x && x <= letInButtonReact.x + letInButtonReact.w
                && y >= letInButtonReact.y && letInButtonReact.y + letInButtonReact.h)
             {
                 std::cout<< "let in  pressed\n";
-               if(currentRound) currentRound->nextGuest();
+               if(currentRound) currentRound->nextGuest(true);
             }
         }
     }
@@ -122,8 +122,7 @@ Uint32 now = SDL_GetTicks();
             }break;
 
         case Scene::RoundIntro:
-            if(SDL_GetTicks()- sceneStartTime > 9000){
-                currentRound->StartRound(renderer);
+            if(SDL_GetTicks()- sceneStartTime > 2000){
                 currentScene=Scene::Gameplay;
                 sceneStartTime = SDL_GetTicks();
             } break;
@@ -138,6 +137,8 @@ Uint32 now = SDL_GetTicks();
                     }
                 }break;
         case Scene::Score:
+            renderText("FINAL SCORE", 300, 150);
+            renderText(rounds.getScoreSummary(),200,200);
             break;
             }
 
@@ -162,7 +163,7 @@ void Game::render() {
                     renderText("You're employed as a doorman at a manor.", 200, 220);
                     renderText("You must only let humans in.. and not vampires.", 180, 260);
                 }
-                std::string roundMessage = "Round " + std::to_string(currentRound->getCurrentRound());
+                std::string roundMessage = "Round " + std::to_string(roundNum);
                 renderText(roundMessage, 320,300);
             }
 

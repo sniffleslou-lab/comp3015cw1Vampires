@@ -13,11 +13,12 @@ class Rounds{
         void Update();
         void render(SDL_Renderer *renderer);
         bool isRoundOver() const;
-        void nextGuest();
+        void nextGuest(bool letIn);
         //for rounds
         bool allGuestsSeen() const;
         int getCurrentRound()const{return CurrentRound;}
         void startNextRound(SDL_Renderer* renderer);
+        std::string getScoreSummary()const;
 
 
 
@@ -28,6 +29,12 @@ private:
     int CurrentRound = 1;
     int totalGuests = 3;
     bool roundOver = false;
+
+    //working on scores
+    int humansLetIn = 0;
+    int vampiresLetIn = 0;
+    int vampiresKicked = 0;
+    int humansKicked = 0;
 
 
     //timer stuff finish this later
