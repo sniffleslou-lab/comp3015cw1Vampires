@@ -2,6 +2,7 @@
 #include "SDL.h"
 #include "Rounds.h"
 #include "Guests.h"
+#include "SDL_ttf.h"
 
 class Game{
 public:
@@ -32,4 +33,5 @@ private:
     SDL_Rect  textBoxReact;
     Rounds rounds;
     Rounds* currentRound;
+    TTF_Font* font = nullptr;
 };

@@ -9,6 +9,7 @@ running(false),
 KickButtonTexture(nullptr),
 LetInButtonTexture(nullptr),
 TextBoxTexture(nullptr)
+
 {}
 
 Game::~Game(){}
@@ -59,7 +60,7 @@ bool Game::init(const char *title, int width, int height) {
         SDL_FreeSurface(tempSurface);
     }
     //font
-    TTF_Font* font = TTF_OpenFont("../assets/fonts/BLKCHCRY.TTF", 24);
+    font = TTF_OpenFont("../assets/fonts/BLKCHCRY.TTF", 24);
     if(!font){
         std::cerr << "failed to load font: " << TTF_GetError() << std::endl;
     }
@@ -113,6 +114,9 @@ void Game::update(){
 }
 
 void Game::render() {
+    if(currentRound){
+        renderRoundText(currentRound->getCurrentRound());
+    }
 
     //buttons
     kickButtonReact = {100,450,256,128};
@@ -125,7 +129,14 @@ void Game::render() {
 
 }
 void Game::renderRoundText(int roundNumber) {
-    
+    SDL_Color white = {255, 255, 255};
+    std::string roundText = "round " + std::to_string(roundNumber);
+    SDL_Surface *textSurface = TTF_RenderText_Blended(font, roundText.c_str(), white);
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, textSurface);
+    SDL_Rect textRect = {320, 270, textSurface->w, textSurface->h};
+    SDL_RenderCopy(renderer,texture, nullptr, &textRect);
+    SDL_FreeSurface(textSurface);
+    SDL_DestroyTexture(texture);
 }
 
 void Game::clean() {
