@@ -107,16 +107,45 @@ void Game::setRounds(Rounds *rounds) {
     currentRound = rounds;
 }
 void Game::update(){
+/*
  if(rounds.isRoundOver()){
      SDL_Delay(6000);
      rounds.startNextRound(renderer);
- }
+ }*/
+Uint32 now = SDL_GetTicks();
+
+    switch (currentScene) {
+        case Scene:: Start:
+            if (now - sceneStartTime > 2000){
+            currentScene = Scene::RoundIntro;
+            sceneStartTime = now;
+            }break;
+
+        case Scene::RoundIntro:
+            if(now- sceneStartTime > 2000){
+                currentScene=Scene::Gameplay;
+                sceneStartTime = now;
+            } break;
+            case Scene::Gameplay:
+                if (rounds.isRoundOver()) {
+                    if (rounds.getCurrentRound() >= 3) {
+                        currentScene = Scene::Score;
+                    } else {
+                        rounds.startNextRound(renderer);
+                        currentScene = Scene::RoundIntro;
+                        sceneStartTime = now;
+                    }
+                }break;
+        case Scene::Score:
+            break;
+            }
+
+
+
+
 }
 
 void Game::render() {
-    if(currentRound){
-        renderRoundText(currentRound->getCurrentRound());
-    }
 
     //buttons
     kickButtonReact = {100,450,256,128};
@@ -126,15 +155,46 @@ void Game::render() {
     SDL_RenderCopy(renderer, LetInButtonTexture, nullptr, &letInButtonReact);
     SDL_RenderCopy(renderer,TextBoxTexture, nullptr,&textBoxReact);
 
+    switch (currentScene) {
+        case Scene::Start:
+            renderText("Portraits of a Vampyre", 250, 150);
+            renderText("You're a doorman, employed as a doorman at a manor.", 200, 220);
+            renderText("You must only let humans in.. and not vampires.", 180, 260);
+            break;
+        case Scene::RoundIntro:
+            if (currentRound) {
+                std::string roundMessage = "Round " + std::to_string(currentRound->getCurrentRound());
+                renderText(roundMessage, 320, 270);
+            }
+            break;
+        case Scene::Gameplay:
+            if (currentRound) {
+                currentRound->render(renderer);
+            }
+            break;
+        case Scene::Score:
+            // renderText("Your Final score: " + rounds.g)
+
+    }
+
 
 }
-void Game::renderRoundText(int roundNumber) {
-    SDL_Color white = {255, 255, 255};
-    std::string roundText = "round " + std::to_string(roundNumber);
-    SDL_Surface *textSurface = TTF_RenderText_Blended(font, roundText.c_str(), white);
-    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, textSurface);
-    SDL_Rect textRect = {320, 270, textSurface->w, textSurface->h};
-    SDL_RenderCopy(renderer,texture, nullptr, &textRect);
+void Game::renderText(const std::string& message, int x, int y){
+
+    SDL_Color white = { 255,255,255};
+    SDL_Surface* textSurface= TTF_RenderText_Blended(font, message.c_str(), white);
+    if(!textSurface){
+        std::cerr << "failed to create text surface: " << TTF_GetError()<< std::endl;
+        return;
+    }
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer,textSurface);
+    if(!texture){
+        std::cerr<<"failed to create texture: " << SDL_GetError()<< std::endl;
+        SDL_FreeSurface(textSurface);
+        return;
+    }
+    SDL_Rect textRect={x,y,textSurface->w,textSurface->h};
+    SDL_RenderCopy(renderer,texture, nullptr,&textRect);
     SDL_FreeSurface(textSurface);
     SDL_DestroyTexture(texture);
 }

@@ -17,7 +17,16 @@ public:
     void setRounds(Rounds* rounds);
     bool isRunning() const{ return running; }
     SDL_Renderer* getRenderer()const;
-    void renderRoundText(int roundNumber);
+    void renderText(const std::string& message, int x, int y);
+    enum class Scene{
+        Start,
+        RoundIntro,
+        Gameplay,
+        Score
+    };
+    Scene currentScene = Scene::Start;
+    Uint32 sceneStartTime =0;
+
 
 private:
     bool running;
@@ -34,4 +43,5 @@ private:
     Rounds rounds;
     Rounds* currentRound;
     TTF_Font* font = nullptr;
+
 };
