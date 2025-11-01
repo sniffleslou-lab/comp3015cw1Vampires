@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "SDL_image.h"
 #include "SDL_ttf.h"
+#include <sstream>
 
 Game::Game() : window(nullptr),
 renderer(nullptr),
@@ -127,18 +128,20 @@ Uint32 now = SDL_GetTicks();
                 sceneStartTime = SDL_GetTicks();
             } break;
             case Scene::Gameplay:
-                if (rounds.isRoundOver()) {
-                    if (rounds.getCurrentRound() >= 3) {
+                if (currentRound->isRoundOver()) {
+                    if (currentRound->getCurrentRound() == 3)
+                    {
                         currentScene = Scene::Score;
+                        sceneStartTime = SDL_GetTicks();
                     } else {
-                        rounds.startNextRound(renderer);
+                        currentRound->startNextRound(renderer);
                         currentScene = Scene::RoundIntro;
                         sceneStartTime = now;
                     }
                 }break;
         case Scene::Score:
             renderText("FINAL SCORE", 300, 150);
-            renderText(rounds.getScoreSummary(),200,200);
+            renderText(currentRound->getScoreSummary(),200,200);
             break;
             }
 
@@ -183,8 +186,15 @@ void Game::render() {
 
 
         case Scene::Score:
-            // renderText("Your Final score: " + rounds.g)
-            break;
+            renderText("FINAL SCORE",300,150);
+            std::string summary =currentRound->getScoreSummary();
+            int y=200;
+            std::istringstream stream(summary);
+            std::string line;
+            while(std::getline(stream,line)){
+                renderText(line,200,y);
+                y+=40;
+            }break;
 
     }
 
@@ -220,3 +230,4 @@ void Game::clean() {
 
     SDL_Quit();
 }
+

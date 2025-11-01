@@ -13,9 +13,10 @@ Rounds::~Rounds() {}
 
 
 void Rounds::StartRound(SDL_Renderer* renderer) {
-    roundOver = false;
+
     totalGuests = 3 +(CurrentRound - 1) * 2;
     roundStartTime = SDL_GetTicks();
+
     std:: cout << "round " << CurrentRound << " started " << std::endl;
 
     int vampireCount = std::min(1 + CurrentRound / 2, totalGuests);
@@ -121,7 +122,7 @@ void Rounds::nextGuest(bool letIn)
         if(g.isVampire) vampiresLetIn++;
         else humansLetIn++;
     }else{
-        if(g.isVampire) vampiresKicked;
+        if(g.isVampire) vampiresKicked++;
         else humansKicked++;
     }
 
@@ -137,6 +138,10 @@ bool Rounds::allGuestsSeen() const {
     return currentGuestIndex >= guests.size();
 }
 void Rounds::startNextRound(SDL_Renderer *renderer) {
+    if(CurrentRound >= 3) {
+        roundOver = true;
+        return;
+    }
     CurrentRound++;
     currentGuestIndex =0;
     roundOver= false;

@@ -22,9 +22,13 @@ int main (int argc, char * argv[]) {
     }
 
     SDL_Renderer* renderer = game.getRenderer();
-    Rounds rounds;
+   /* Rounds rounds;
     game.setRounds(&rounds);
-    rounds.StartRound(renderer);
+    rounds.StartRound(renderer);*/
+
+    Rounds* r = new Rounds();
+    game.setRounds(r);
+    r->StartRound(renderer);
 
 //for running
     while (game.isRunning())
@@ -35,19 +39,19 @@ int main (int argc, char * argv[]) {
         SDL_SetRenderDrawColor(renderer,0,0,0,255);
         SDL_RenderClear(renderer);
 
-        rounds.render(renderer);
         game.render();
 
         SDL_RenderPresent(renderer);
-
+/*
         if (rounds.isRoundOver()){
             std::cout<<"round is over! Next round...." << std::endl;
             rounds.startNextRound(renderer);
-        }
+        }*/
 
 
 
     }
+    delete r;
     game.clean();
     SDL_Quit();
     return 0;

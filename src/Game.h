@@ -40,7 +40,6 @@ private:
     //text box
     SDL_Texture*TextBoxTexture;
     SDL_Rect  textBoxReact;
-    Rounds rounds;
     Rounds* currentRound;
     TTF_Font* font = nullptr;
 
