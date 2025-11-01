@@ -16,6 +16,7 @@ public:
     void setRounds(Rounds* rounds);
     bool isRunning() const{ return running; }
     SDL_Renderer* getRenderer()const;
+    void renderRoundText(int roundNumber);
 
 private:
     bool running;

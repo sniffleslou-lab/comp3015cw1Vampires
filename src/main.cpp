@@ -40,6 +40,12 @@ int main (int argc, char * argv[]) {
 
         SDL_RenderPresent(renderer);
 
+        if (rounds.isRoundOver()){
+            std::cout<<"round is over! Next round...." << std::endl;
+            rounds.startNextRound(renderer);
+        }
+
+
 
     }
     game.clean();

@@ -6,11 +6,14 @@
 #include "Guests.h"
 #include <filesystem>
 #include <SDL_image.h>
+#include <algorithm>
+#include <random>
+#include <chrono>
 
 namespace fs =std::filesystem;
 using json = nlohmann::json;
 
-//this is for randomly assigning portrait
+//this is for randomly assigning a portrait
 std::string getRandomPortrait(const std::string& genderFolder)
 {
     std::vector<std::string> portraits;
@@ -37,16 +40,18 @@ std::string getRandomPortrait(const std::string& genderFolder)
 
 }
 
-std::vector<Guest> loadGuests(const std::string& guestFilePath, const std::string & vampireFilePath,int vampireCount)
+std::vector<Guest> loadGuests(const std::string& guestFilePath, const std::string & vampireFilePath,int totalGuests, int vampireCount)
+
 {
 
-    std::vector<Guest> guests;
+    std::vector<Guest> allGuests;
+    std::vector<Guest> selectedGuests;
     std::vector<std::string> vampireTraits;
     //attempt3 loading guests
     std::ifstream guestList(guestFilePath);
     if(!guestList.is_open()){
         std::cerr << "could not open guest list json from path: " << std::endl;
-        return guests;
+        return selectedGuests;
     }else {
         std::cerr << "opened gustlist json!" <<std::endl;
     }
@@ -68,26 +73,32 @@ std::vector<Guest> loadGuests(const std::string& guestFilePath, const std::strin
         else if (g.gender == "f")
             g.portraitPath = getRandomPortrait(std::string(ASSETS_PATH) + "/textures/F");
 
-        guests.push_back(g);
+        allGuests.push_back(g);
     }
-
-        //vampiretraits.json
+    //stuffling and selecting totalguests
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+            std::shuffle(allGuests.begin(), allGuests.end(), std::default_random_engine(seed));
+            for(int i = 0; i < totalGuests && i < allGuests.size(); ++i){
+                selectedGuests.push_back(allGuests[i]);
+            }
+        //vampiretraits.j
+        // son
         std::ifstream vampireFile(vampireFilePath);
         json vampJson;
         vampireFile >> vampJson;
         vampireTraits = vampJson["vampireTraits"].get<std::vector<std::string>>();
 
         srand(static_cast<unsigned int>(time(nullptr)));
-        for (int i = 0; i < vampireCount && !guests.empty(); i++) {
-            int index = rand() % guests.size();
-            guests[index].isVampire = true;
+        for (int i = 0; i < vampireCount && !selectedGuests.empty(); i++) {
+            int index = rand() % selectedGuests.size();
+            selectedGuests[index].isVampire = true;
 
             for (int j = 0; j < 2; j++) {
                 int tIndex = rand() % vampireTraits.size();
-                guests[index].traits.push_back(vampireTraits[tIndex]);
+                selectedGuests[index].traits.push_back(vampireTraits[tIndex]);
             }
         }
-        return guests;
+        return selectedGuests;
 
     }
 

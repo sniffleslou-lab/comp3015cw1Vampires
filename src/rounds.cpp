@@ -18,7 +18,14 @@ void Rounds::StartRound(SDL_Renderer* renderer) {
     roundStartTime = SDL_GetTicks();
     std:: cout << "round " << CurrentRound << " started " << std::endl;
 
-    guests = loadGuests(std::string (ASSETS_PATH)+"/data/guestList.json",std::string(ASSETS_PATH)+"/data/vampire_traits.json",2);
+    int vampireCount = std::min(1 + CurrentRound / 2, totalGuests);
+    //guests = loadGuests(std::string (ASSETS_PATH)+"/data/guestList.json",std::string(ASSETS_PATH)+"/data/vampire_traits.json",2);
+    guests = loadGuests(
+            std::string (ASSETS_PATH)+"/data/guestList.json",
+                        std::string
+                        (ASSETS_PATH)+"/data/vampire_traits.json",
+                        totalGuests, vampireCount
+                        );
 
     std::unordered_map<std::string, SDL_Texture*> textureCache;
 
@@ -57,53 +64,53 @@ void Rounds::Update() {
         roundOver = true;
         std::cout << "round over!" << std::endl;
     }
-   if (totalGuests <=0){
-        roundOver = true;
-        totalGuests +=2;
-    }
+  // if (totalGuests <=0){
+    //    roundOver = true;
+    //    totalGuests +=2;
+  //  }
 }
 
 void Rounds::render(SDL_Renderer *renderer) {
-    if (guests.empty() || currentGuestIndex >= guests.size()){
+    if (guests.empty() || currentGuestIndex >= guests.size()) {
         std::cerr << "no guests to render or index out of range. \n";
         return;
     }
-    Guest& g = guests[currentGuestIndex];
-    if (!g.texture){
-        std::cerr << "no texture for guests "<< g.name << " | path " << g.portraitPath <<std::endl;
+    Guest &g = guests[currentGuestIndex];
+    if (!g.texture) {
+        std::cerr << "no texture for guests " << g.name << " | path " << g.portraitPath << std::endl;
         return;
     }
-    SDL_Rect dstRect = {325,100,150,150};
-    std::cerr<< "drawing one guest: " << g.name << " | " << g.portraitPath << std::endl;
-    if (SDL_RenderCopy(renderer,g.texture, nullptr, &dstRect)!=0){
-        std::cerr << "render copy failed: " << SDL_GetError()<< std::endl;
+    SDL_Rect dstRect = {325, 100, 150, 150};
+    //std::cerr<< "drawing one guest: " << g.name << " | " << g.portraitPath << std::endl;
+    if (SDL_RenderCopy(renderer, g.texture, nullptr, &dstRect) != 0) {
+        std::cerr << "render copy failed: " << SDL_GetError() << std::endl;
     }
-   /*
-    int x = 50;
-    int y = 100;
-    int portraitWidth = 150;
-    int portraitHeight = 150;
+    /*
+     int x = 50;
+     int y = 100;
+     int portraitWidth = 150;
+     int portraitHeight = 150;
 
-    //this sections draws guest portraits
-    for(size_t i =0; i < guests.size();++i) {
-        Guest &g = guests[i];
+     //this sections draws guest portraits
+     for(size_t i =0; i < guests.size();++i) {
+         Guest &g = guests[i];
 
-        if (!g.texture) { ;
-            std::cerr << " no texture for guest " << g.name << " | path: " << g.portraitPath << std::endl;
-            continue;
-        }
+         if (!g.texture) { ;
+             std::cerr << " no texture for guest " << g.name << " | path: " << g.portraitPath << std::endl;
+             continue;
+         }
 
-            SDL_Rect dstRect = {
-                    x + static_cast<int>(i*(portraitWidth +20)),y,portraitWidth,portraitHeight
-            };
-            std::cout << "drawing portrait: " << g.portraitPath << std::endl;
+             SDL_Rect dstRect = {
+                     x + static_cast<int>(i*(portraitWidth +20)),y,portraitWidth,portraitHeight
+             };
+             std::cout << "drawing portrait: " << g.portraitPath << std::endl;
 
-            if (SDL_RenderCopy(renderer,g.texture, nullptr,&dstRect) !=0) {
-                std::cerr << "Render copy  failed: " <<SDL_GetError() << std::endl;
-            }
-    }*/
+             if (SDL_RenderCopy(renderer,g.texture, nullptr,&dstRect) !=0) {
+                 std::cerr << "Render copy  failed: " <<SDL_GetError() << std::endl;
+             }
+     }*/
 }
-void::Rounds::nextGuest()
+void Rounds::nextGuest()
 {
     if(currentGuestIndex + 1 < guests.size()){
         currentGuestIndex++;
@@ -114,10 +121,15 @@ void::Rounds::nextGuest()
     }
 }
 bool Rounds::allGuestsSeen() const {
-    return currentGuestIndex >= guests.size() -1;
+    return currentGuestIndex >= guests.size();
 }
 void Rounds::startNextRound(SDL_Renderer *renderer) {
     CurrentRound++;
+    currentGuestIndex =0;
+    roundOver= false;
+
+
+
     StartRound(renderer);
 }
 bool Rounds::isRoundOver() const {

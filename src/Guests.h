@@ -12,5 +12,5 @@ struct Guest {
     bool isVampire;
     SDL_Texture* texture = nullptr;
 };
-std::vector<Guest> loadGuests(const std::string& guestFilePath, const std::string & vampireFilePath,int vampireCount);
+std::vector<Guest> loadGuests(const std::string& guestFilePath, const std::string & vampireFilePath,int totalGuests, int vampireCount);
 

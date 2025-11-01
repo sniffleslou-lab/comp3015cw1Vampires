@@ -91,13 +91,13 @@ void Game::handleEvents() {
                 && y >= kickButtonReact.y && kickButtonReact.y + kickButtonReact.h)
             {
                 std::cout<< "kick pressed\n";
-                currentRound->nextGuest();
+                if(currentRound) currentRound->nextGuest();
             }
             if(x >= letInButtonReact.x && x <= letInButtonReact.x + letInButtonReact.w
                && y >= letInButtonReact.y && letInButtonReact.y + letInButtonReact.h)
             {
                 std::cout<< "let in  pressed\n";
-                currentRound->nextGuest();
+               if(currentRound) currentRound->nextGuest();
             }
         }
     }
@@ -107,7 +107,7 @@ void Game::setRounds(Rounds *rounds) {
 }
 void Game::update(){
  if(rounds.isRoundOver()){
-     SDL_Delay(2000);
+     SDL_Delay(6000);
      rounds.startNextRound(renderer);
  }
 }
@@ -123,6 +123,9 @@ void Game::render() {
     SDL_RenderCopy(renderer,TextBoxTexture, nullptr,&textBoxReact);
 
 
+}
+void Game::renderRoundText(int roundNumber) {
+    
 }
 
 void Game::clean() {

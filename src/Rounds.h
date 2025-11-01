@@ -24,15 +24,15 @@ class Rounds{
 
 
 private:
-    size_t currentGuestIndex;
-    int CurrentRound;
-    int totalGuests;
-    bool roundOver;
+    size_t currentGuestIndex = 0;
+    int CurrentRound = 1;
+    int totalGuests = 3;
+    bool roundOver = false;
 
 
     //timer stuff finish this later
-    Uint32 roundStartTime;
-    Uint32  roundDuration;
+    Uint32 roundStartTime = 0;
+    Uint32  roundDuration = 90000;
 
     std::vector<Guest> guests;
 };
