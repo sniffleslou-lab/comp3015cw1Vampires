@@ -175,7 +175,7 @@ std::string Rounds::getEndingMessage() const {
     }else if( vampiresLetIn == 0 && humansKicked ==0){
         return "Hero. With every human saved and every vampire left outside, \n you managed to let everyone see dawn with no bloodshed. \ncongrats";
     } else if(humansLetIn==0 && vampiresLetIn==0){
-        return "at the end you hear a knock. Peeping through the hole of the day \n you are overcome to let IT in \nbefore you know it grabs your hand, pulls you up,\nand suck every drop of blood.\ndead and failure.";
+        return "at the end you hear a knock. Peeping through the hole of the door \n you are overcome to let IT in \nbefore you know it grabs your hand, pulls you up,\nand suck every drop of blood.\ndead and failure.";
     }else{
         return "Some humans are saved... while some lie outside not moving.";
     }
