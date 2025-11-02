@@ -3,6 +3,7 @@
 #include "Rounds.h"
 #include "Guests.h"
 #include "SDL_ttf.h"
+#include "SDL_mixer.h"
 
 class Game{
 public:
@@ -44,6 +45,9 @@ private:
     TTF_Font* font = nullptr;
     TTF_Font* fontLarge = nullptr;
     TTF_Font* fontSmall = nullptr;
+
+    //for background track
+    Mix_Music* rainMusic = nullptr;
 
 
 

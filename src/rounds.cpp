@@ -169,7 +169,7 @@ std::string  Rounds::getCurrentGuestInfo() const {
 std::string Rounds::getEndingMessage() const {
     //this for the end scene
     if (vampiresLetIn >= 3 ){
-        return "Iron.. The smell of blood reeks the halls, an blood bath.\n\ You let too many vampires in and no humans, \neven yourself, wake to see the daylight. ";
+        return "Iron.. The smell of blood reeks the halls, an blood bath.\n You let too many vampires in and no humans, \neven yourself, do not wake to see the daylight. ";
     }else if( humansKicked >= 6){
         return "You played too safe, shame those turned away will have fate undecided for better or worse";
     }else if( vampiresLetIn == 0 && humansKicked ==0){

@@ -4,6 +4,7 @@
 #include "SDL_ttf.h"
 #include <sstream>
 #include "fstream"
+#include <SDL_mixer.h>
 
 Game::Game() : window(nullptr),
 renderer(nullptr),
@@ -66,9 +67,20 @@ bool Game::init(const char *title, int width, int height) {
     if(!font){
         std::cerr << "failed to load font: " << TTF_GetError() << std::endl;
     }
-    //SMALL FONT
+    //SMALL FONT& LARGE font
     fontSmall = TTF_OpenFont("../assets/fonts/BLKCHCRY.TTF", 20);
     fontLarge = TTF_OpenFont("../assets/fonts/BLKCHCRY.TTF", 50);
+
+    if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2,2048)<0){
+        std::cerr<< "SDL_mizer cannot initalize: " << Mix_GetError() << std::endl;
+    }
+    rainMusic = Mix_LoadMUS("../assets/sounds/calming-rain.wav");
+    if (!rainMusic){
+        std::cerr << "failed to load rain: " << Mix_GetError()<< std::endl;
+    }else{
+        Mix_PlayMusic(rainMusic, -1);
+        Mix_VolumeMusic(3);
+    }
 
 
     //kickButtonReact = {100,400,128,64};
@@ -254,6 +266,8 @@ void Game::clean() {
     SDL_DestroyTexture(LetInButtonTexture);
     SDL_DestroyTexture(TextBoxTexture);
     IMG_Quit();
+    Mix_FreeMusic(rainMusic);
+    Mix_CloseAudio();
 
     SDL_Quit();
 }
