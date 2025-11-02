@@ -119,10 +119,10 @@ void Rounds::nextGuest(bool letIn)
 
     Guest& g = guests[currentGuestIndex];
     if(letIn){
-        if(g.isVampire) vampiresLetIn++;
+        if(letIn && g.isVampire) vampiresLetIn++;
         else humansLetIn++;
     }else{
-        if(g.isVampire) vampiresKicked++;
+        if(!letIn && g.isVampire) vampiresKicked++;
         else humansKicked++;
     }
 
@@ -148,8 +148,41 @@ void Rounds::startNextRound(SDL_Renderer *renderer) {
     StartRound(renderer);
 
 }
+std::string  Rounds::getCurrentGuestInfo() const {
+    if(currentGuestIndex >= guests.size()) return "";
+
+    const Guest& g =guests[currentGuestIndex];
+    std::string info = "name: " + g.name;
+
+    if (!g.traits.empty()){
+        info += "\nTrait: ";
+        for (size_t  i=0; i < g.traits.size(); ++i){
+            info += g.traits[i];
+            if(i<g.traits.size()-1){
+                info += ", " ;
+            }
+        }
+    }
+    return info;
+}
+
+std::string Rounds::getEndingMessage() const {
+    //this for the end scene
+    if (vampiresLetIn >= 3 ){
+        return "Iron.. The smell of blood reeks the halls, an blood bath.\n\ You let too many vampires in and no humans, \neven yourself, wake to see the daylight. ";
+    }else if( humansKicked >= 6){
+        return "You played too safe, shame those turned away will have fate undecided for better or worse";
+    }else if( vampiresLetIn == 0 && humansKicked ==0){
+        return "Hero. With every human saved and every vampire left outside, \n you managed to let everyone see dawn with no bloodshed. \ncongrats";
+    } else if(humansLetIn==0 && vampiresLetIn==0){
+        return "at the end you hear a knock. Peeping through the hole of the day \n you are overcome to let IT in \nbefore you know it grabs your hand, pulls you up,\nand suck every drop of blood.\ndead and failure.";
+    }else{
+        return "Some humans are saved... while some lie outside not moving.";
+    }
+
+;}
 std::string Rounds::getScoreSummary() const {
-    return "humans Let In: " + std::to_string(humansLetIn)+
+    return "Humans Let In: " + std::to_string(humansLetIn)+
     "\nVampires Kicked: " +std::to_string(vampiresKicked)+
     "\nVampires Let In: " +std::to_string(vampiresLetIn)+
     "\nHumans Kicked: " +std::to_string(humansKicked);

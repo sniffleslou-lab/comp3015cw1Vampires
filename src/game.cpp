@@ -3,6 +3,7 @@
 #include "SDL_image.h"
 #include "SDL_ttf.h"
 #include <sstream>
+#include "fstream"
 
 Game::Game() : window(nullptr),
 renderer(nullptr),
@@ -65,6 +66,11 @@ bool Game::init(const char *title, int width, int height) {
     if(!font){
         std::cerr << "failed to load font: " << TTF_GetError() << std::endl;
     }
+    //SMALL FONT
+    fontSmall = TTF_OpenFont("../assets/fonts/BLKCHCRY.TTF", 20);
+    fontLarge = TTF_OpenFont("../assets/fonts/BLKCHCRY.TTF", 50);
+
+
     //kickButtonReact = {100,400,128,64};
    // letInButtonReact = {100,400,128,64};
     kickButtonReact = {100,450,256,128};
@@ -140,13 +146,10 @@ Uint32 now = SDL_GetTicks();
                     }
                 }break;
         case Scene::Score:
-            renderText("FINAL SCORE", 300, 150);
+            renderText("Final Score", 300, 150);
             renderText(currentRound->getScoreSummary(),200,200);
             break;
             }
-
-
-
 
 }
 
@@ -161,49 +164,71 @@ void Game::render() {
             if (currentRound) {
                 int roundNum = currentRound->getCurrentRound();
 
-                if( roundNum == 1){
-                    renderText("Portraits of a Vampyre", 250, 150);
-                    renderText("You're employed as a doorman at a manor.", 200, 220);
+                if (roundNum == 1) {
+                    renderText("Portraits of a Vampyre", 250, 150,fontLarge);
+                    renderText("You're employed as a doorman at Rylatt's manor.", 200, 220);
                     renderText("You must only let humans in.. and not vampires.", 180, 260);
                 }
                 std::string roundMessage = "Round " + std::to_string(roundNum);
-                renderText(roundMessage, 320,300);
+                renderText(roundMessage, 320, 300);
             }
 
             break;
-        case Scene::Gameplay:
+        case Scene::Gameplay: {
             if (currentRound) {
                 currentRound->render(renderer);
             }
             //buttons
-            kickButtonReact = {100,450,256,128};
-            letInButtonReact = {450,450,256,128};
-            textBoxReact = {20,290,760,150};
+            kickButtonReact = {100, 450, 256, 128};
+            letInButtonReact = {450, 450, 256, 128};
+            textBoxReact = {20, 290, 760, 150};
             SDL_RenderCopy(renderer, KickButtonTexture, nullptr, &kickButtonReact);
             SDL_RenderCopy(renderer, LetInButtonTexture, nullptr, &letInButtonReact);
-            SDL_RenderCopy(renderer,TextBoxTexture, nullptr,&textBoxReact);
+            SDL_RenderCopy(renderer, TextBoxTexture, nullptr, &textBoxReact);
+
+            std::string guestInfo = currentRound->getCurrentGuestInfo();
+            int textY = textBoxReact.y + 20;
+
+            std::istringstream guestStream(guestInfo);
+            std::string guestLine;
+            while (std::getline(guestStream,guestLine)){
+                renderText(guestLine,textBoxReact.x + 20, textY,fontSmall);
+                textY +=30;
+
+            }
             break;
-
-
-        case Scene::Score:
-            renderText("FINAL SCORE",300,150);
-            std::string summary =currentRound->getScoreSummary();
-            int y=200;
+        }
+        case Scene::Score: {
+            renderText("final score", 300, 150,fontLarge);
+            std::string summary = currentRound->getScoreSummary();
+            int y = 200;
             std::istringstream stream(summary);
             std::string line;
-            while(std::getline(stream,line)){
-                renderText(line,200,y);
+            while (std::getline(stream, line)) {
+                renderText(line, 200, y);
+                y += 40;
+            }
+            std::string endingMessage = currentRound->getEndingMessage();
+
+            std::istringstream endStream(endingMessage);
+            std::string endLine;
+            while (std::getline(endStream,endLine)){
+                renderText(endLine,200,y,font);
                 y+=40;
-            }break;
+            }
+
+            break;
+        }
 
     }
 
 
 }
-void Game::renderText(const std::string& message, int x, int y){
+void Game::renderText(const std::string& message, int x, int y, TTF_Font* customFont){
 
     SDL_Color white = { 255,255,255};
-    SDL_Surface* textSurface= TTF_RenderText_Blended(font, message.c_str(), white);
+    TTF_Font* useFont = customFont ? customFont : font;
+    SDL_Surface* textSurface= TTF_RenderText_Blended(useFont, message.c_str(), white);
     if(!textSurface){
         std::cerr << "failed to create text surface: " << TTF_GetError()<< std::endl;
         return;
@@ -218,6 +243,8 @@ void Game::renderText(const std::string& message, int x, int y){
     SDL_RenderCopy(renderer,texture, nullptr,&textRect);
     SDL_FreeSurface(textSurface);
     SDL_DestroyTexture(texture);
+
+
 }
 
 void Game::clean() {

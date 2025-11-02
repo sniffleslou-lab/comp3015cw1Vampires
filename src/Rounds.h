@@ -19,6 +19,19 @@ class Rounds{
         int getCurrentRound()const{return CurrentRound;}
         void startNextRound(SDL_Renderer* renderer);
         std::string getScoreSummary()const;
+        //starting by displaying info
+        std::string  getCurrentGuestInfo() const;
+        std::string getEndingMessage() const;
+
+    int getVampiresLetIn() const{return vampiresLetIn;}
+    int getHumansLetIn() const{return humansLetIn;}
+    int getVampiresKicked() const{return vampiresKicked;}
+    int getHumansKicked() const{return humansKicked;}
+
+
+
+
+
 
 
 
@@ -37,9 +50,12 @@ private:
     int humansKicked = 0;
 
 
+
     //timer stuff finish this later
     Uint32 roundStartTime = 0;
     Uint32  roundDuration = 90000;
+
+
 
     std::vector<Guest> guests;
 };

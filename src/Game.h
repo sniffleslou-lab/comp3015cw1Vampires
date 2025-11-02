@@ -17,7 +17,7 @@ public:
     void setRounds(Rounds* rounds);
     bool isRunning() const{ return running; }
     SDL_Renderer* getRenderer()const;
-    void renderText(const std::string& message, int x, int y);
+    void renderText(const std::string& message, int x, int y,TTF_Font* customFont= nullptr);
     enum class Scene{
         Start,
         RoundIntro,
@@ -42,5 +42,9 @@ private:
     SDL_Rect  textBoxReact;
     Rounds* currentRound;
     TTF_Font* font = nullptr;
+    TTF_Font* fontLarge = nullptr;
+    TTF_Font* fontSmall = nullptr;
+
+
 
 };
