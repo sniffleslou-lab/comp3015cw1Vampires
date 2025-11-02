@@ -169,13 +169,19 @@ std::string  Rounds::getCurrentGuestInfo() const {
 std::string Rounds::getEndingMessage() const {
     //this for the end scene
     if (vampiresLetIn >= 3 ){
-        return "Iron.. The smell of blood reeks the halls, an blood bath.\n You let too many vampires in and no humans, \neven yourself, do not wake to see the daylight. ";
+        return "Iron.. The smell of blood reeks the halls, an blood bath."
+               "\nYou let too many vampires in and no humans, "
+               "\neven yourself, do not wake to see the daylight. ";
     }else if( humansKicked >= 6){
         return "You played too safe, shame those turned away will have fate undecided for better or worse";
     }else if( vampiresLetIn == 0 && humansKicked ==0){
-        return "Hero. With every human saved and every vampire left outside, \n you managed to let everyone see dawn with no bloodshed. \ncongrats";
+        return "Hero. With every human saved and every vampire left outside, "
+               "\nyou managed to let everyone see dawn with no bloodshed. "
+               "\ncongrats";
     } else if(humansLetIn==0 && vampiresLetIn==0){
-        return "at the end you hear a knock. Peeping through the hole of the door \n you are overcome to let IT in \nbefore you know it grabs your hand, pulls you up,\nand suck every drop of blood.\ndead and failure.";
+        return "at the end you hear a knock. Peeping through the hole of the door "
+               "\nyou are overcome to let IT in \nbefore you know it grabs your hand, pulls you up,"
+               "\nand suck every drop of blood.\ndead and failure.";
     }else{
         return "Some humans are saved... while some lie outside not moving.";
     }
