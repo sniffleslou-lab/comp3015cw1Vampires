@@ -1,5 +1,5 @@
 #include <SDL2/SDL.h>
-#define ASSETS_PATH "assets/"
+#include "Path.h"
 #include <iostream>
 #include "Rounds.h"
 #include "Guests.h"
@@ -8,6 +8,7 @@
 #include <unordered_map>
 #include <string>
 #include <fstream>
+
 
 
 Rounds::Rounds() : CurrentRound(1),totalGuests(0),roundOver(false), roundStartTime(0), roundDuration(90000), currentGuestIndex(0){}
@@ -25,9 +26,9 @@ void Rounds::StartRound(SDL_Renderer* renderer) {
     int vampireCount = std::min(1 + CurrentRound / 2, totalGuests);
     //guests = loadGuests(std::string (ASSETS_PATH)+"/data/guestList.json",std::string(ASSETS_PATH)+"/data/vampire_traits.json",2);
     guests = loadGuests(
-            std::string (ASSETS_PATH)+"/data/guestList.json",
+            std::string (ASSETS_PATH)+"data/guestList.json",
                         std::string
-                        (ASSETS_PATH)+"/data/vampire_traits.json",
+                        (ASSETS_PATH)+"data/vampire_traits.json",
                         totalGuests, vampireCount
                         );
 

@@ -101,6 +101,9 @@
     <IncludePath>C:\Users\Super\vcpkg\installed\x64-windows\include</IncludePath>
     <LibraryPath>C:\Users\Super\vcpkg\installed\x64-windows\lib;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.19041.0\um\x64;C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\lib\x64;C:\Program Files (x86)\Windows Kits\10\Lib\10.0.19041.0\ucrt\x64</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgXUseBuiltInApplocalDeps>true</VcpkgXUseBuiltInApplocalDeps>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -187,7 +190,9 @@
     <ClInclude Include="..\..\src\Buttons.h" />
     <ClInclude Include="..\..\src\Game.h" />
     <ClInclude Include="..\..\src\Guests.h" />
+    <ClInclude Include="..\..\src\Path.h" />
     <ClInclude Include="..\..\src\Rounds.h" />
+    <ClInclude Include="Path.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\controls.cpp" />

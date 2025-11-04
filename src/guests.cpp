@@ -8,7 +8,7 @@
 #include <SDL2/SDL_image.h>
 #include <algorithm>
 #include <random>
-#define ASSETS_PATH "assets/"
+#include "Path.h"
 #include <chrono>
 #include <SDL2/SDL.h>
 
@@ -69,11 +69,11 @@ std::vector<Guest> loadGuests(const std::string& guestFilePath, const std::strin
         g.isVampire = false;
 
         if (g.gender == "m")
-            g.portraitPath = getRandomPortrait(std::string(ASSETS_PATH) + "/textures/M");
+            g.portraitPath = getRandomPortrait(std::string(ASSETS_PATH) + "textures/M");
             //g.portraitPath = getRandomPortrait("assets/textures/M");
 
         else if (g.gender == "f")
-            g.portraitPath = getRandomPortrait(std::string(ASSETS_PATH) + "/textures/F");
+            g.portraitPath = getRandomPortrait(std::string(ASSETS_PATH) + "textures/F");
 
         allGuests.push_back(g);
     }

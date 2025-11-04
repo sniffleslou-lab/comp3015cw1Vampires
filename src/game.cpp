@@ -27,6 +27,7 @@ bool Game::init(const char *title, int width, int height) {
         std::cerr << "IMG_InitFailed " << IMG_GetError() << std::endl;
     }
     char *basePath =SDL_GetBasePath();
+    std::cout << "SDL base path: " << basePath << std::endl;
     if (basePath){
         std::cout << "current working path is " << basePath << std::endl;
         SDL_free(basePath);
@@ -38,7 +39,20 @@ bool Game::init(const char *title, int width, int height) {
     }
 
     //loading buttons
+    std::ifstream test("../assets/textures/KickButton.png");
+    if (!test.is_open()) {
+        std::cerr << "File not found or unreadable." << std::endl;
+    }
+    else {
+        std::cerr << "File exists and is readable." << std::endl;
+    }
+    int imgFlags = IMG_INIT_PNG;
+    if (!(IMG_Init(imgFlags) & imgFlags)) {
+        std::cerr << "SDL_image could not initialize! SDL_image Error: " << IMG_GetError() << std::endl;
+    }
     //kick button
+    std::string path = "../assets/textures/KickButton.png";
+    std::cout << "Attempting to load: " << path << std::endl;
     SDL_Surface *tempSurface = IMG_Load("../assets/textures/KickButton.png");
     if (!tempSurface) {
         std::cerr << "failed to load kick button: " << IMG_GetError() << std::endl;
