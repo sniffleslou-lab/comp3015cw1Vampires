@@ -5,10 +5,12 @@
 #include <string>
 #include "Guests.h"
 #include <filesystem>
-#include <SDL_image.h>
+#include <SDL2/SDL_image.h>
 #include <algorithm>
 #include <random>
+#define ASSETS_PATH "assets/"
 #include <chrono>
+#include <SDL2/SDL.h>
 
 namespace fs =std::filesystem;
 using json = nlohmann::json;

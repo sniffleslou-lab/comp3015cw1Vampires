@@ -1,10 +1,11 @@
+#include <SDL2/SDL.h>
 #include <iostream>
 #include "Game.h"
-#include "SDL_image.h"
-#include "SDL_ttf.h"
+#include "SDL2/SDL_image.h"
+#include "SDL2/SDL_ttf.h"
 #include <sstream>
 #include "fstream"
-#include <SDL_mixer.h>
+#include <SDL2/SDL_mixer.h>
 
 Game::Game() : window(nullptr),
 renderer(nullptr),

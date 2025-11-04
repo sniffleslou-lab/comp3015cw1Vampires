@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\Buttons.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Guests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Rounds.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\controls.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\guests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\rounds.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\x64\assets\data\guestList.json" />
+    <None Include="..\x64\assets\data\vampire_traits.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="..\x64\assets\fonts\BLKCHCRY.TTF" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\x64\assets\sounds\calming-rain.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\x64\assets\textures\LetInButton.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\x64\assets\textures\KickButton.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\x64\assets\textures\BorderOutline.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\x64\assets\textures\M\AlexandrePainting.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\x64\assets\textures\M\George.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\x64\assets\textures\M\gongora.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\x64\assets\textures\M\johan.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\x64\assets\textures\M\JohnC.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\x64\assets\textures\M\ludwigPainting.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\x64\assets\textures\M\WilliamTHrone.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\x64\assets\textures\F\comtessePainting.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\x64\assets\textures\F\ElisabethPainting.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\x64\assets\textures\F\henriettaPainting.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\x64\assets\textures\F\madamePaulPainting.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\x64\assets\textures\F\mariaPainting.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\x64\assets\textures\F\maryShellyPainting.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\x64\assets\textures\F\pariclesPainting.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\x64\assets\textures\F\WilhelmineVonPainting.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

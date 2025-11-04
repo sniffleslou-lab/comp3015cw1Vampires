@@ -1,9 +1,12 @@
-#include <SDL.h>
+#include <SDL2/SDL.h>
+#define ASSETS_PATH "assets/"
 #include <iostream>
 #include "Rounds.h"
 #include "Guests.h"
-#include "SDL_image.h"
-#include "SDL_rect.h"
+#include "SDL2/SDL_image.h"
+#include "SDL2/SDL_rect.h"
+#include <unordered_map>
+#include <string>
 #include <fstream>
 
 

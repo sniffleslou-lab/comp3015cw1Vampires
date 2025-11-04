@@ -50,3 +50,32 @@ lib/
 
 # debug information files
 *.dwo
+Build folders
+x64/
+Debug/
+Release/
+*.obj
+*.pdb
+*.ilk
+*.log
+*.tlog
+*.ipch
+*.idb
+
+Visual Studio files
+.vs/
+*.suo
+*.user
+.vcxproj.
+*.opensdf
+*.sdf
+
+SDL2 DLLs (optional if you want to exclude them)
+*.dll
+
+OS junk
+Thumbs.db
+.DS_Store
+
+Crash dumps
+*.dmp

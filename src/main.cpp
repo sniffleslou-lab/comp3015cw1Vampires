@@ -1,5 +1,6 @@
+#define SDL_MAIN_HANDLED
 #include <iostream>
-#include "SDL.h"
+#include "SDL2/SDL.h"
 #include "Game.h"
 #include "Rounds.h"
 #include "Guests.h"
