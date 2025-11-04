@@ -6,6 +6,7 @@
 #include "SDL2/SDL_ttf.h"
 #include "SDL2/SDL_mixer.h"
 #include "Game.h"
+#include "Path.h"
 #include "Rounds.h"
 #include "Guests.h"
 
@@ -27,7 +28,7 @@ int main (int argc, char * argv[]) {
         return 1;
     }
 
-    // Initialize SDL_ttf
+    // SDL_ttf
     if (TTF_Init() == -1) {
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "SDL_ttf Error", TTF_GetError(), nullptr);
         IMG_Quit();
@@ -35,7 +36,7 @@ int main (int argc, char * argv[]) {
         return 1;
     }
 
-    // Initialize SDL_mixer
+    
     if (!(Mix_Init(MIX_INIT_OGG | MIX_INIT_MP3) & (MIX_INIT_OGG | MIX_INIT_MP3))) {
         SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "SDL_mixer Error", Mix_GetError(), nullptr);
         TTF_Quit();
@@ -52,6 +53,7 @@ int main (int argc, char * argv[]) {
         SDL_Quit();
         return 1;
     }
+  
 //calls game.h basically the same as setup. It shows a message when it fails
     Game game;
     if(!game.init("Vampires", 800, 600)) {

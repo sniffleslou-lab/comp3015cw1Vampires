@@ -4,6 +4,7 @@
 #include "SDL2/SDL_image.h"
 #include "SDL2/SDL_ttf.h"
 #include <sstream>
+#include "Path.h"
 #include "fstream"
 #include <SDL2/SDL_mixer.h>
 

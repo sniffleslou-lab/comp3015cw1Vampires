@@ -1,3 +1,4 @@
 #pragma once
-#define ASSETS_PATH "assets/"
+#include <iostream>
+#define ASSETS_PATH "../assets/"
 

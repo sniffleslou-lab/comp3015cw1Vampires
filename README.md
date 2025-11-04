@@ -4,10 +4,11 @@ doorman has to check if the person entering is a vampire or not. for comp3016 co
 
 HOW TO RUN::::
 
-This is built with mac, so the file has to be open inside mac
+open 'PortraitOfAnVampireVS' > click open 'PortraitOfAnVampyre'
+ensure vcpkg is integrated and sdl2 dependeancies ae installed
+build in x64 debug
 
-click executable folder
-click vampires
+the exe file is is 'comp3015cw1Vampires\PortraitOfAnVampireVS\x64\Debug'
 
 How to play:::
 
