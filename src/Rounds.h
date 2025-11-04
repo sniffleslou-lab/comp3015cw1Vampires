@@ -3,6 +3,7 @@
 #include "SDL2/SDL.h"
 #include "Guests.h"
 #include <vector>
+#include "Path.h"
 
 class Rounds{
     public:

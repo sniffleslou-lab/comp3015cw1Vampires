@@ -57,8 +57,17 @@ std::vector<Guest> loadGuests(const std::string& guestFilePath, const std::strin
     }else {
         std::cerr << "opened gustlist json!" <<std::endl;
     }
+    //json guestJson;
+    //guestList >> guestJson;
     json guestJson;
-    guestList >> guestJson;
+    try {
+        guestList >> guestJson;
+    }
+    catch (const std::exception& e) {
+        std::cerr << "json parssing error: " << e.what() << std::endl;
+        return selectedGuests;
+    }
+
 
     for (auto &item: guestJson["guests"]) {
         Guest g;

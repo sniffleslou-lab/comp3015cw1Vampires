@@ -24,9 +24,10 @@ void Rounds::StartRound(SDL_Renderer* renderer) {
     std:: cout << "round " << CurrentRound << " started " << std::endl;
 
     int vampireCount = std::min(1 + CurrentRound / 2, totalGuests);
+
     //guests = loadGuests(std::string (ASSETS_PATH)+"/data/guestList.json",std::string(ASSETS_PATH)+"/data/vampire_traits.json",2);
     guests = loadGuests(
-            std::string (ASSETS_PATH)+"data/guestList.json",
+            std::string (ASSETS_PATH)+"data/guestList.JSON",
                         std::string
                         (ASSETS_PATH)+"data/vampire_traits.json",
                         totalGuests, vampireCount
